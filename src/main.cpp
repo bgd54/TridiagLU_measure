@@ -77,11 +77,12 @@ void run_tridiagLU(RandomMesh<double> &mesh, int num_iters,
       a[i] = mesh.a()[i];
       b[i] = mesh.b()[i];
       c[i] = mesh.c()[i];
-      d[i] = mesh.d()[i];
     }
     runtimes[5] += std::chrono::duration_cast<std::chrono::microseconds>(
                        std::chrono::high_resolution_clock::now() - tp1)
-                       .count() / 1000000.0;
+                       .count() /
+                   1000000.0;
+    d.assign(mesh.d().begin(), mesh.d().end());
     /* Solve the system */
     MPI_Barrier(MPI_COMM_WORLD);
     // BEGIN_PROFILING("tridiagLU");
